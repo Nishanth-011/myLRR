@@ -1,15 +1,65 @@
-%k近邻函数im是数据集，k是近邻数,返回一个n*k+1的矩阵每一行前k个是近邻的标号，k+1个是第k个的距离
-function Z = fkNN(im,k)
-[m,n] = size(im);
-save=[];
-result=zeros(n,k);
-for i=1:n
-    save=im(:,i);
-    for l=1:k
-        [y,num]=min(save);
-        result(i,l)=num;
-        result(i,l+1)=y;
-        save(num)=1000;
+function [R,D] = fkNN(X,k,distanc,target)
+%这个代码主要用于找最近邻
+%输入参数：
+%X--原始的数据矩阵
+%k--保留的个数，默认为2
+%distanc--是指使用的距离，0为欧式距离，1为余弦距离，默认为0
+%target--选择最大或者最小，0为最小1为最大，默认为0
+%输出：
+if nargin < 4
+    target = 0;
+end
+if nargin < 3
+    distanc = 0;
+end
+if nargin < 2
+    k = 2;
+end
+saveX = X;
+[m,n] = size(saveX);
+distanceX = zeros(n,n);
+result = zeros(n,k);
+dis = zeros(n,k);
+if distanc == 0
+	for i = 1:n
+		for j = 1:n
+			distanceX(i,j) = norm(saveX(:,i)-saveX(:,j));
+		end
+    end
+    if target == 0
+        for i = 1:n
+            [a,b] = sort(distanceX(i,:));
+            result(i,:) = b(2:k+1);
+            dis(i,:) = a(2:k+1);
+        end 
+    else
+        result = zeros(n,k);
+        for i = 1:n
+            [a,b] = sort(distanceX(i,:),'descend');
+            result(i,:)=b(1:k);
+            dis(i,:) = a(1:k);
+        end
+    end
+else
+	for i = 1:n
+		for j = 1:n
+			distanceX(i,j) = dot(X(:,i),X(:,j))/(norm(X(:,i))*norm(X(:,j)));
+		end
+    end
+    if target == 0
+        for i = 1:n
+            [a,b] = sort(distanceX(i,:));
+            result(i,:) = b(1:k);
+            dis(i,:) = a(1:k);
+        end 
+    else
+        result = zeros(n,k);
+        for i = 1:n
+            [a,b] = sort(distanceX(i,:),'descend');
+            result(i,:)=b(2:k+1);
+            dis(i,:) = a(2:k+1);
+        end
     end
 end
-Z=result;
+R = result;
+D = dis;
