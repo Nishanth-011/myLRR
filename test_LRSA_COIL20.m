@@ -1,7 +1,7 @@
 %%%%%TEST COIL20%%%%%%%%%
 clc,clear;
-load COIL20
-nn = 2;
+load YaleB_3232
+nn = 3;
 fea = fea(1:72*nn,:);
 gnd = gnd(1:72*nn);
 folder_now = pwd;
@@ -43,7 +43,7 @@ minU0 = 1e-12;
 maxU0 = 1e5;
 
 
-    [A OBJ] = LRSA2(test', gama_1, gama_2);
+    [A OBJ] = LRSA1(test', gama_1, gama_2);
     A = NormalizeFea(A);
     
     AG = A;

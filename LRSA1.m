@@ -18,15 +18,19 @@ if nargin < 2
 end
 
 % L = ||Z||* + ||E||1 + D(i,j)*Z(i,j); H.t. X = XZ+E.  Z>=0;
-distX = L2_distance_1(X,X);
-% [sizem,sizen]=size(distX);
-% for i = 1:sizem
-%     aaa = distX(i,:);
-%     bbb = sort(aaa);
-%     ccc = atan(aaa-bbb(fix(sizen/5)))+pi/2;
-%     distX(i,:) = ccc*100;
-%     distX(i,:) = distX(i,:)-distX(i,i);
-% end
+%distX = L2_distance_1(X,X);
+aa = fkNN(X);
+bb = constractmap(aa);
+cc = transmit(bb);
+disdis = 10000*ones(num, num);
+for i =1:num
+    for j = 1:num
+        if cc(i,j)>0
+            disdis(i,j) = 1;
+        end
+    end
+end
+distX = disdis;       
 islocal = 0;
 if islocal == 1
     k = 50;
