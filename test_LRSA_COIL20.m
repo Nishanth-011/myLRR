@@ -1,6 +1,7 @@
 %%%%%TEST COIL20%%%%%%%%%
 clc,clear;
-load YaleB_3232
+load COIL20
+%load YaleB_3232
 nn = 3;
 fea = fea(1:72*nn,:);
 gnd = gnd(1:72*nn);
@@ -40,16 +41,12 @@ gama_1 = 50;
 gama_2 = 11;
 sele = 4;
 minU0 = 1e-12;
-maxU0 = 1e5;
-
-
-    [A OBJ] = LRSA1(test', gama_1, gama_2);
+maxU0 = 1e5;  
+    [A OBJ] = LRSA(test', gama_1, gama_2); 
     A = NormalizeFea(A);
-    
     AG = A;
     save('AG','AG');
     save('OBJ','OBJ');
-    
     W = A;
     D = diag(sum(A));
 

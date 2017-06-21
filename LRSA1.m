@@ -19,18 +19,12 @@ end
 
 % L = ||Z||* + ||E||1 + D(i,j)*Z(i,j); H.t. X = XZ+E.  Z>=0;
 %distX = L2_distance_1(X,X);
-aa = fkNN(X);
-bb = constractmap(aa);
-cc = transmit(bb);
-disdis = 10000*ones(num, num);
-for i =1:num
-    for j = 1:num
-        if cc(i,j)>0
-            disdis(i,j) = 1;
-        end
-    end
-end
-distX = disdis;       
+[b,c]=fkNN(X,2);
+%aa = constractmap(b);
+%bb = transmit(aa);
+aa = mapdis(b,c);
+[D,path]=floyd(aa);
+distX = D;
 islocal = 0;
 if islocal == 1
     k = 50;

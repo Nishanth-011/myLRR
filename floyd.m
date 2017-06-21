@@ -16,7 +16,7 @@ for k=1:n
         for j=1:n
             if D(i,k)+D(k,j)<D(i,j)
                 D(i,j)=D(i,k)+D(k,j);
-                path(i,j)=path(i,k)
+                path(i,j)=path(i,k);
             end
         end
     end

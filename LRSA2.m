@@ -19,26 +19,22 @@ end
 
 % L = ||Z||* + ||E||1 + D(i,j)*Z(i,j); H.t. X = XZ+E.  Z>=0;
 %distX = L2_distance_1(X,X);
-cosX = cosdis(X');
-distX = 1-cosX;
-distX = tan(distX*pi*2/3);
-dis=distX;
-% [fm fn] = size(distX);
-% for i = 1:fm
-%     for j = 1:fn
-%         if distX(i,j)>10000
-%             distX(i,j)=10000;
-%         end
-%     end
-% end
-% [sizem,sizen]=size(distX);
-% for i = 1:sizem
-%     aaa = distX(i,:);
-%     bbb = sort(aaa);
-%     ccc = atan(aaa-bbb(fix(sizen/2)))+pi/2;
-%     distX(i,:) = ccc*100;
-%     distX(i,:) = distX(i,:)-distX(i,i);
-% end
+% cosX = cosdis(X');
+% distX = 1-cosX;
+% distX = tan(distX*pi*2/3);
+% dis=distX;
+[b,c]=fkNN(X);
+aa = constractmap(b);
+bb = transmit(aa);
+[m,~] = size(bb);
+for i = 1:m
+    for j = 1:m
+        if bb(i,j) >0
+            bb(i,j) = 1;
+        end
+    end
+end
+distX = bb;
 islocal = 0;
 if islocal == 1
     k = 50;

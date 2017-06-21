@@ -21,10 +21,10 @@ distanceX = zeros(n,n);
 result = zeros(n,k);
 dis = zeros(n,k);
 if distanc == 0
-	for i = 1:n
-		for j = 1:n
+    for i = 1:n
+        for j = 1:n
 			distanceX(i,j) = norm(saveX(:,i)-saveX(:,j));
-		end
+        end
     end
     if target == 0
         for i = 1:n
@@ -41,7 +41,7 @@ if distanc == 0
         end
     end
 else
-	for i = 1:n
+    for i = 1:n
 		for j = 1:n
 			distanceX(i,j) = dot(X(:,i),X(:,j))/(norm(X(:,i))*norm(X(:,j)));
 		end

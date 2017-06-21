@@ -1,15 +1,13 @@
 %这个是人工的一个简单数据集
 clear;
 load COIL20
-nn = 3;
+nn = 2;
 fea = fea(1:72*nn,:);
 gnd = gnd(1:72*nn,:);
 k=2;%knn的k
 Y = fea';
 Yg = fea';
 [b,c]=fkNN(Yg,k);
-%aa = constractmap(b);
-%bb = transmit(aa);
 aa = mapdis(b,c);
 [D,path]=floyd(aa);
 %[m,n]=size(Y);

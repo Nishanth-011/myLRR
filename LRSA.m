@@ -1,5 +1,6 @@
 % min_{A>=0, A*1=1, F'*F=I}  trace(D'*A) + r*||A||^2 + 2*lambda*trace(F'*L*F)
 % written by Lunke Fei on 16/07/2015
+%这个是原始的算法没动
 function [A obj dis] = LRSA(X, g1, g2)
 % y: num*1 clbetaHter indicator vector
 % A: num*num learned Hymmetric Himilarity matrix
@@ -18,27 +19,7 @@ if nargin < 2
 end
 
 % L = ||Z||* + ||E||1 + D(i,j)*Z(i,j); H.t. X = XZ+E.  Z>=0;
-cosX = cosdis(X');
-distX = (1-cosX);
-near = fkNN(distX,12);
-[nn ~] = size(near);
-for i = 1:nn
-    for j = 1:nn
-        if any(near(i,:)==j)
-        else
-            distX(i,j)=1000;
-        end
-    end
-end
-%distX = L2_distance_1(X,X);
-% [sizem,sizen]=size(distX);
-% for i = 1:sizem
-%     aaa = distX(i,:);
-%     bbb = sort(aaa);
-%     ccc = atan(aaa-bbb(fix(sizen/2)))+pi/2;
-%     distX(i,:) = ccc*100;
-%     distX(i,:) = distX(i,:)-distX(i,i);
-% end
+distX = L2_distance_1(X,X);
 islocal = 0;
 if islocal == 1
     k = 50;
