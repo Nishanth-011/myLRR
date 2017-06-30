@@ -5,8 +5,6 @@ function [result] = constractmap(data)
 	[m,n] = size(data);
 	savedata = zeros(m,m);
 	for i = 1:m
-		for j = 1:n
-			savedata(i,data(i,j)) = 1;
-		end
+        savedata(i,data(i,:)) = 1;
 	end
 	result = savedata;

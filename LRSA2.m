@@ -1,6 +1,6 @@
 % min_{A>=0, A*1=1, F'*F=I}  trace(D'*A) + r*||A||^2 + 2*lambda*trace(F'*L*F)
 % written by Lunke Fei on 16/07/2015
-function [A obj dis] = LRSA2(X, g1, g2)
+function [A obj dis] = LRSA2(X, g1, g2,knum)
 % y: num*1 clbetaHter indicator vector
 % A: num*num learned Hymmetric Himilarity matrix
 addpath(genpath('.\YALL1_v1.3'));
@@ -22,19 +22,21 @@ end
 % cosX = cosdis(X');
 % distX = 1-cosX;
 % distX = tan(distX*pi*2/3);
-% dis=distX;
-[b,c]=fkNN(X);
+
+[b,c]=fkNN(X,64);
 aa = constractmap(b);
 bb = transmit(aa);
 [m,~] = size(bb);
 for i = 1:m
     for j = 1:m
-        if bb(i,j) >0
-            bb(i,j) = 1;
+        if bb(i,j) ==0
+            bb(i,j) = 1000;
         end
     end
+    bb(i,i) = 0;
 end
 distX = bb;
+dis=distX;
 islocal = 0;
 if islocal == 1
     k = 50;
@@ -128,6 +130,3 @@ for i=1:ss
     %A(i,i) = 0;
     %A = (A>T).*A;
 end;
-
-
-
