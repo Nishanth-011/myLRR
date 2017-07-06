@@ -1,8 +1,8 @@
 %%%%%TEST COIL20%%%%%%%%%
-clc,clear;
+clear;
 %load COIL20
 load YaleB_3232
-nn = 2;
+nn = 20 ;
 fea = fea(1:64*nn,:);
 gnd = gnd(1:64*nn);
 folder_now = pwd;
@@ -11,7 +11,7 @@ addpath([folder_now, '\funs']);
 % options = [];
 % options.PCARatio = 0.98;
 % %options.ReducedDim = 60;
-% [eigvector,eigvalue,meanData,new_data] = PCA(fea,options);
+% [eigvector,eigvalue,meanData,new_data] = PCA(fea,opt ions);
 % fea=new_data;
 % %%
 samp_num = size(fea,1);
@@ -42,8 +42,11 @@ gama_2 = 11;
 sele = 4;
 minU0 = 1e-12;
 maxU0 = 1e5;  
-    [A OBJ] = LRSA(test', gama_1, gama_2); 
-    A = NormalizeFea(A);
+    %[A OBJ] = LRSA(test', gama_1, gama_2);
+    %[A OBJ] = LRSA(test', 0.1, 0.1);
+    [A OBJ] = LRSA3(test', 0.1, 0.1,2,nn*64);
+    
+    A = NormalizeFea(A); 
     AG = A;
     save('AG','AG');
     save('OBJ','OBJ');
@@ -83,6 +86,7 @@ maxU0 = 1e5;
         ratio = double(recogNum)/testNum;
         rate(r) = ratio;
     end
+    max(rate)
     mean(rate)
     std(rate)
 %---------------------------------------------------------------

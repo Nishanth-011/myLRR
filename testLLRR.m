@@ -3,7 +3,7 @@
 clear;
 %load COIL20
 load YaleB_3232
-nn = 2;
+nn = 20;
 fea = fea(1:64*nn,:);
 gnd = gnd(1:64*nn);
 folder_now = pwd;
@@ -98,6 +98,7 @@ WW=zeros(n,n);
         ratio = double(recogNum)/testNum;
         rate(r) = ratio;
     end
+    max(rate)
     mean(rate)
     std(rate)
 %---------------------------------------------------------------

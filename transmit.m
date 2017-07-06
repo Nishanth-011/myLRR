@@ -11,13 +11,7 @@ function [graph] = transmit(data, time)
     for i = 1:time
         for j = 1:m
             nlist = find(datasave(j,:)>0);
-            aa = sum(datasave(nlist(:),:),2);
             datan(j,:) = datan(j,:) + sum(datasave(nlist(:),:));
-%             for k = 1:m
-%                 if datasave(j,k) > 0
-%                     datan(j,:) = datan(j,:) + data(k,:);
-%                 end
-%             end
         end
         datasave = datan;
     end

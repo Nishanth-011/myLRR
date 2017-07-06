@@ -23,7 +23,7 @@ end
 % distX = 1-cosX;
 % distX = tan(distX*pi*2/3);
 
-[b,c]=fkNN(X,64);
+[b,c]=fkNN(X,knum);
 aa = constractmap(b);
 bb = transmit(aa);
 [m,~] = size(bb);
