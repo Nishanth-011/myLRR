@@ -25,6 +25,8 @@ end
 
 [b,c]=fkNN(X,knum);
 aa = constractmap(b);
+% aa =(aa+aa')/2;
+% aa(find(aa>0))=1;
 bb = transmit(aa);
 [m,~] = size(bb);
 for i = 1:m

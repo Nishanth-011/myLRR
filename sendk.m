@@ -5,7 +5,7 @@ function result = sendk(data, time, kn)
 [m,~] = size(data);
 if nargin<3
     kn = 1;
-elseif nargin<2
+elseif nargin<2   
     time = m;
 end
 datanew = data;

@@ -1,0 +1,30 @@
+load USPSfu
+number=10;%每一类的个数
+data0=double(data0);
+data1=double(data1);
+data2=double(data2);
+data3=double(data3);
+data4=double(data4);
+data5=double(data5);
+data6=double(data6);
+data7=double(data7);
+data8=double(data8);
+data9=double(data9);
+list=randperm(1100);
+list=list(1:number);
+data0=data0(:,list);
+data1=data1(:,list);
+data2=data2(:,list);
+data3=data3(:,list);
+data4=data4(:,list);
+data5=data5(:,list);
+data6=data6(:,list);
+data7=data7(:,list);
+data8=data8(:,list);
+data9=data9(:,list);
+fea=[data0 data1 data2 data3 data4 data5 data6 data7 data8 data9];
+fea=fea';
+gnd=ones(10*number,1);
+for i=1:10
+    gnd(1+(i-1)*number:i*number)=i-1;
+end

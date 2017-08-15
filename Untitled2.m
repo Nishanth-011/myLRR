@@ -1,4 +1,4 @@
-load YaleB_3232
+ load YaleB_3232
 h = waitbar(0,'Please wait...');
 kk = 3;
 number = 64;

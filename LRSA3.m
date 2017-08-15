@@ -19,6 +19,7 @@ end
 
 [b,c]=fkNN(X,k);
 aa = constractmap(b);
+aa(find(aa>0))=1;
 bb = sendk(aa,time,k);
 [m,~] = size(bb);
 for i = 1:m

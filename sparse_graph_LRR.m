@@ -117,7 +117,7 @@ while iter<maxIter
     
     %solving Z    
     %-----------Using PROPACK--------------%
-    M =  beta* (ZLT + ZL);
+    M =  beta*(ZLT + ZL);
     M = M + mu *X' *(XZ -X + E -Y1/mu); 
     M = M +mu *(Z- J+Y2/ mu); 
     M = Z - M/eta;

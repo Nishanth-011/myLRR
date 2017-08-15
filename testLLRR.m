@@ -1,11 +1,12 @@
 %%%%%TEST COIL20%%%%%%%%%
 %clc,
 clear;
-%load COIL20
-load YaleB_3232
-nn = 20;
-fea = fea(1:64*nn,:);
-gnd = gnd(1:64*nn);
+%load COIL20;
+load Yale_32x32;
+%load YaleB_3232
+nn = 15;
+fea = fea(1:11*nn,:);
+gnd = gnd(1:11*nn);
 folder_now = pwd;
 addpath([folder_now, '\funs']);
 %% reduce demension by PCA
@@ -18,7 +19,7 @@ end
 fea =  NormalizeFea(fea);
 test = fea;
 runtimes = 10;
-sele = 4;
+sele = 1;
 minU0 = 1e-12;
 maxU0 = 1e5;
 k=5;%knnµÄk

@@ -1,0 +1,38 @@
+clear;
+%load COIL20;
+%load YaleBext_3232;
+%load ORL_32x32 
+%load Yale_64x64;
+%load AR_database_60_43 
+%load mnist_all
+%load PIE_32x32  
+%  feaa = NewTrain_DAT(:,1:kk*number); 
+%  fea =double(feaa'); 
+% gnd = trainlabels(1:kk*number); 
+% gnd = gnd';
+load umist 
+kk = 2  ;%类别数
+number = find(gnd==kk);%每一类的个数
+number=max(number);
+%  feaa = NewTrain_DAT(:,1:kk*number);  
+%  fea =double(feaa'); 
+% gnd = trainlabels(1:kk*number); 
+% gnd = gnd'; 
+fea=X';
+fea=fea(1:number,:);%kk *number,:); 
+gnd=gnd(1:number);%kk*number);
+% number=64;
+for time=1:10
+num(time)=2*time;
+fea1=fea(1:time*2*number,:); 
+gnd1=gnd(1:time*2*number);
+fea1=NormalizeFea(fea1); 
+for i = 1:10
+    c =  NJW(fea1,2*time); 
+    c =  kmeans(fea1,2*time); 
+    
+    idx=bestMap(gnd1,c); % 匹配
+    accuracy(i)=length(find(gnd1 == idx))/length(gnd1);% 找到gnd和已经分类号的idx中相匹配的值并计算总量
+end 
+accuracy_m(time)=mean(accuracy); 
+end

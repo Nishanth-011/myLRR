@@ -23,6 +23,9 @@ end
 %aa = constractmap(b);
 %bb = transmit(aa);
 aa = mapdis(b,c);
+[nn,~]=size(aa);
+aa=(aa+aa')/2;
+aa(find(aa>0))=1;
 [D,path]=floyd(aa);
  distX = (D+D')/2;
 islocal = 0;

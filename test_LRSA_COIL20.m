@@ -1,10 +1,11 @@
 %%%%%TEST COIL20%%%%%%%%%
 clear;
 %load COIL20
-load YaleB_3232
-nn = 20 ;
-fea = fea(1:64*nn,:);
-gnd = gnd(1:64*nn);
+load Yale_32x32;
+%load YaleBext_3232
+nn = 15;
+fea = fea(1:11*nn,:);
+gnd = gnd(1:11*nn);
 folder_now = pwd;
 addpath([folder_now, '\funs']);
 %% reduce demension by PCA
@@ -39,12 +40,13 @@ test = fea;
 runtimes = 10;
 gama_1 = 50;
 gama_2 = 11;
-sele = 4;
+sele = 1;
 minU0 = 1e-12;
 maxU0 = 1e5;  
     %[A OBJ] = LRSA(test', gama_1, gama_2);
-    %[A OBJ] = LRSA(test', 0.1, 0.1);
-    [A OBJ] = LRSA3(test', 0.1, 0.1,2,nn*64);
+    %[A OBJ] = LRSA1(test', 50, 11, 2);
+    %[A OBJ] = LRSA2(test', 50, 11, 2); 
+    [A OBJ] = LRSA3(test', 50, 11,2,nn*11);
     
     A = NormalizeFea(A); 
     AG = A;
@@ -75,7 +77,7 @@ maxU0 = 1e5;
             end                
         end
 
-        F = inv(D+U0-W+Umin)*U0*Y;
+        F = (D+U0-W+Umin)\U0*Y;
         [maxF, idF] = max(F,[],2);
         for j = 1:samp_num
             FF(j,idF(j)) = 1;
