@@ -1,11 +1,11 @@
 %%%%%TEST COIL20%%%%%%%%%
 clear;
 %load COIL20
-load Yale_32x32;
-%load YaleBext_3232
-nn = 15;
-fea = fea(1:11*nn,:);
-gnd = gnd(1:11*nn);
+%load Yale_32x32;
+load YaleBext_3232
+nn = 2;
+fea = fea(1:64*nn,:);
+gnd = gnd(1:64*nn);
 folder_now = pwd;
 addpath([folder_now, '\funs']);
 %% reduce demension by PCA
@@ -43,12 +43,13 @@ gama_2 = 11;
 sele = 1;
 minU0 = 1e-12;
 maxU0 = 1e5;  
-    %[A OBJ] = LRSA(test', gama_1, gama_2);
+     [A OBJ] = LRSA(test', gama_1, gama_2);
     %[A OBJ] = LRSA1(test', 50, 11, 2);
-    %[A OBJ] = LRSA2(test', 50, 11, 2); 
-    [A OBJ] = LRSA3(test', 50, 11,2,nn*11);
+    %[A OBJ] = LRSA2(test', 50, 11, 3); 
+    %[A OBJ] = LRSA3(test', 50, 11,2,nn*11);
     
     A = NormalizeFea(A); 
+   % A = A + 0.0000001*ones(size(A));
     AG = A;
     save('AG','AG');
     save('OBJ','OBJ');
@@ -88,7 +89,7 @@ maxU0 = 1e5;
         ratio = double(recogNum)/testNum;
         rate(r) = ratio;
     end
-    max(rate)
+    %max(rate)
     mean(rate)
     std(rate)
 %---------------------------------------------------------------

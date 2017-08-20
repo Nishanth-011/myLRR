@@ -2,11 +2,11 @@
 %clc,
 clear;
 %load COIL20;
-load Yale_32x32;
-%load YaleB_3232
-nn = 15;
-fea = fea(1:11*nn,:);
-gnd = gnd(1:11*nn);
+%load Yale_32x32;
+load YaleBext_3232
+nn = 32;
+fea = fea(1:2414,:);%64*nn,:);
+gnd = gnd(1:2414);%64*nn);
 folder_now = pwd;
 addpath([folder_now, '\funs']);
 %% reduce demension by PCA
@@ -19,7 +19,7 @@ end
 fea =  NormalizeFea(fea);
 test = fea;
 runtimes = 10;
-sele = 1;
+sele = 32 ;
 minU0 = 1e-12;
 maxU0 = 1e5;
 k=5;%knn的k
@@ -41,20 +41,6 @@ WW=zeros(n,n);
      end
      WW(i,i) = 0;
  end
-% ****************************
-%*********************************
-%这一段是使用距离找最近邻
-% for i=1:n
-%    aa=a(i,k+1);
-%    for j=1:n
-%        if norm(Yg(:,i)-Yg(:,j))<=aa
-%            WW(i,j)=1;
-%            WW(j,i)=1;%这个是用来对称的
-%        end
-%    end
-%    WW(i,i)=0;
-% end
-%**************************************
 
     [A,OBJ] =  sparse_graph_LRR(Yg,WW);
     A = NormalizeFea(A);
