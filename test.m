@@ -3,18 +3,20 @@ clear;
 %load YaleBext_3232;
 %load ORL_32x32 
 %load Yale_32x32;
-%load AR_database_60_43  
+load AR_database_60_43  
 %load mnist_all
-load PIE_32x32  
-%load umist 
-kk = 4   ;%类别数
+%load PIE_32x32  
+%load umist
+
+
+ feaa = NewTrain_DAT;   
+ fea =double(feaa'); 
+gnd = trainlabels; 
+gnd = gnd'; 
+%fea=X';
+kk = 45  ;%类别数
 number = find(gnd==kk);%每一类的个数
 number=max(number);
-%  feaa = NewTrain_DAT(:,1:kk*number);   
-%  fea =double(feaa'); 
-% gnd = trainlabels(1:kk*number); 
-% gnd = gnd'; 
-%fea=X';
 fea=fea(1:number,:);%kk *number,:);  
 gnd=gnd(1:number);%kk*number);
 kkk=5;

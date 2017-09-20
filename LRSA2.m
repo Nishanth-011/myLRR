@@ -5,7 +5,7 @@ function [A obj dis] = LRSA2(X, g1, g2,knum)
 % A: num*num learned Hymmetric Himilarity matrix
 addpath(genpath('.\YALL1_v1.3'));
 
-NITER = 1000;
+NITER = 2000;
 
 dim = size(X,1);
 num = size(X,2);
