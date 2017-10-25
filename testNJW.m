@@ -1,5 +1,5 @@
 clear;
-%load COIL20;
+load COIL20;
 %load YaleBext_3232;
 %load ORL_32x32 
 %load Yale_64x64;
@@ -10,7 +10,7 @@ clear;
 %  fea =double(feaa'); 
 % gnd = trainlabels(1:kk*number); 
 % gnd = gnd';
-load umist 
+%load umist 
 kk = 2  ;%类别数
 number = find(gnd==kk);%每一类的个数
 number=max(number);
@@ -18,13 +18,13 @@ number=max(number);
 %  fea =double(feaa'); 
 % gnd = trainlabels(1:kk*number); 
 % gnd = gnd'; 
-fea=X';
+%fea=X';
 fea=fea(1:number,:);%kk *number,:); 
 gnd=gnd(1:number);%kk*number);
 % number=64;
 for i = 1:10
-    %c =  NJW(fea,kk); 
-    c =  kmeans(fea,kk); 
+    c =  NJW(fea,kk); 
+    %c =  kmeans(fea,kk); 
     
     idx=bestMap(gnd,c); % 匹配
     accuracy(i)=length(find(gnd == idx))/length(gnd);% 找到gnd和已经分类号的idx中相匹配的值并计算总量
