@@ -43,10 +43,23 @@ gama_2 = 11;
 sele = 6;
 minU0 = 1e-12;
 maxU0 = 1e5;  
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 662380046dce7c0c25aea3f5a3e33db8721bd8d8
     [A OBJ] = LRSA(test', gama_1, gama_2);
     %[A OBJ] = LRSA1(test', 50, 11, 2);
     %[A OBJ] = LRSA2(test', 50, 11, 4); 
     %[A OBJ] = LRSA3(test', 50, 11,3,nn*11);
+<<<<<<< HEAD
+=======
+=======
+    %[A OBJ] = LRSA(test', gama_1, gama_2);
+    %[A OBJ] = LRSA1(test', 50, 11, 2);
+    [A OBJ] = LRSA2(test', 50, 11, 4); 
+    %[A OBJ] = LRSA3(test', 50, 11,5,nn*11);
+>>>>>>> 2cba506f9191543c7965a14801e5dca242438412
+>>>>>>> 662380046dce7c0c25aea3f5a3e33db8721bd8d8
     
     A = NormalizeFea(A); 
     A = A + 0.0000001*ones(size(A));
