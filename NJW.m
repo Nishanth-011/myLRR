@@ -33,8 +33,12 @@ nEigVec =eigVectors(:,ind(1:k));
 % 构造归一化矩阵U从获得的特征向量
 U=zeros(size(nEigVec,1),k);
 for i=1:size(nEigVec,1)
-    n = sqrt(sum(nEigVec(i,:).^2));    
-    U(i,:) = nEigVec(i,:) ./ n; 
+    n = sqrt(sum(nEigVec(i,:).^2)); 
+    if n == 0
+         U(i,:) = nEigVec(i,:);
+    else
+        U(i,:) = nEigVec(i,:) ./ n;
+    end
 end
 U = kmeans(U,k);
 end

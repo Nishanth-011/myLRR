@@ -15,7 +15,7 @@ for i = 1:time
         listn = find(datanew(j,:)>0);%找到大于0的每一项
         newsum = sum(data(listn,:));%
         listsum = find(newsum>0);
-        listk = setdiff(listsum,listn);%
+        listk = setdiff(listsum,listn);%找到差别
         if(isempty(listk))
             continue;
         end

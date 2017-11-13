@@ -1,4 +1,4 @@
-%%%%%TEST COIL20%%%%%%%%%
+ %%%%%TEST COIL20%%%%%%%%%
 clear;
 %load COIL20
 %load Yale_32x32;
@@ -40,16 +40,16 @@ test = fea;
 runtimes = 10;
 gama_1 = 50;
 gama_2 = 11;
-sele = 1;
+sele = 6;
 minU0 = 1e-12;
 maxU0 = 1e5;  
-     [A OBJ] = LRSA(test', gama_1, gama_2);
+    [A OBJ] = LRSA(test', gama_1, gama_2);
     %[A OBJ] = LRSA1(test', 50, 11, 2);
-    %[A OBJ] = LRSA2(test', 50, 11, 3); 
-    %[A OBJ] = LRSA3(test', 50, 11,2,nn*11);
+    %[A OBJ] = LRSA2(test', 50, 11, 4); 
+    %[A OBJ] = LRSA3(test', 50, 11,3,nn*11);
     
     A = NormalizeFea(A); 
-   % A = A + 0.0000001*ones(size(A));
+    A = A + 0.0000001*ones(size(A));
     AG = A;
     save('AG','AG');
     save('OBJ','OBJ');
