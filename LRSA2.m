@@ -5,7 +5,7 @@ function [A obj dis] = LRSA2(X, g1, g2,knum)
 % A: num*num learned Hymmetric Himilarity matrix
 addpath(genpath('.\YALL1_v1.3'));
 
-NITER = 1000;
+NITER = 2000;
 
 dim = size(X,1);
 num = size(X,2);
@@ -28,6 +28,11 @@ aa = constractmap(b);
 % aa =(aa+aa')/2;
 % aa(find(aa>0))=1;
 bb = transmit(aa);
+% [b,c]=fkNN(X,knum);
+% aa = constractmap(b);
+% aa(find(aa>0))=1;
+% %bb = sendk(aa,time,k);
+% bb = sendknew(aa,99,1);
 [m,~] = size(bb);
 for i = 1:m
     for j = 1:m
@@ -131,4 +136,4 @@ for i=1:ss
     A(i,idxa0) = EProjSimplex_new(ad);
     %A(i,i) = 0;
     %A = (A>T).*A;
-end;
+end

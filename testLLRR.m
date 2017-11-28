@@ -4,7 +4,7 @@ clear;
 %load COIL20;
 %load Yale_32x32;
 load YaleBext_3232
-nn = 32;
+nn = 2;
 fea = fea(1:2414,:);%64*nn,:);
 gnd = gnd(1:2414);%64*nn);
 folder_now = pwd;
