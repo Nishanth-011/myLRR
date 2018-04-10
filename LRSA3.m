@@ -26,7 +26,7 @@ bb = sendknew(aa,time,k);
 for i = 1:m
     for j = 1:m
         if bb(i,j) ==0
-            bb(i,j) = 1000;
+            bb(i,j) = 10000000;
         end
     end
     bb(i,i) = 0;

@@ -27,8 +27,6 @@ for i = 1:time
     dataold = datanew;
 end
 for i = 1:m
-    dataold(i,i) = 0;
+    dataold(i,i) = 0; 
 end
 result = dataold;
-        
-        
