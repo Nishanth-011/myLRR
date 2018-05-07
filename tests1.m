@@ -1,6 +1,5 @@
 %%%%%TEST COIL20%%%%%%%%%
 clear;
-<<<<<<< HEAD
 for time = 1:7
 %load COIL20;
 %load ORL_32x32;
@@ -8,11 +7,9 @@ for time = 1:7
 load YaleBext_3232
 % load umist
 % fea = X';
-=======
 %load COIL20
 %load Yale_32x32;
 load YaleBext_3232
->>>>>>> a50b32285e197bde7a9f052ddccc9df1cb606843
 nn = 2;
 fea = fea(1:2414,:);
 gnd = gnd(1:2414);
@@ -50,22 +47,16 @@ test = fea;
 runtimes = 10;
 gama_1 = 50;
 gama_2 = 11;
-<<<<<<< HEAD
 sele = time;
-=======
 sele = 6;
->>>>>>> a50b32285e197bde7a9f052ddccc9df1cb606843
 minU0 = 1e-12;
 maxU0 = 1e5;  
     %[A OBJ] = LRSA(test', gama_1, gama_2);
     %[A OBJ] = LRSA1(test', 50, 11, 2);
     %[A OBJ] = LRSA2(test', 50, 11, 4); 
-<<<<<<< HEAD
     %[A OBJ] = LRSA3(test', 50, 11,3,64);
-    [A OBJ] = solve_lrr(test', 1);
-=======
+    %[A OBJ] = solve_lrr(test', 1);
     [A OBJ] = LRSA3(test', 50, 11,3,64);   
->>>>>>> a50b32285e197bde7a9f052ddccc9df1cb606843
     A = NormalizeFea(A); 
     A = A + 0.0000001*ones(size(A));
     AG = A;
@@ -103,14 +94,8 @@ maxU0 = 1e5;
         rate(r) = ratio;
     end
     %max(rate)
-<<<<<<< HEAD
     rate7(time) = mean(rate)
     mean(sele)
     std(rate)
 end
-=======
-    mean(rate)
-    mean(sele)
-    std(rate)
->>>>>>> a50b32285e197bde7a9f052ddccc9df1cb606843
 %---------------------------------------------------------------

@@ -23,6 +23,8 @@ for i = 1:time
     end
     if dataold == datanew
         break;
+    else
+        ffff = dataold - datanew;
     end
     dataold = datanew;
 end
