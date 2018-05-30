@@ -22,10 +22,10 @@ for time1 = 1:1%ttime
         %  fea =double(feaa'); 
         % gnd = trainlabels; 
         % gnd = gnd'; 
-        fea=X';
+        %fea=X';
         data = fea;
         datal = gnd;
-        kk = 2*time2 ;%类别数
+        kk = 5*time2 ;%类别数
         number = find(gnd==kk);%每一类的个数
         number=max(number);
         fea=data(1:number,:);%kk *number,:);  
