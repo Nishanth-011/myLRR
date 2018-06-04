@@ -1,20 +1,17 @@
-%%%%%TEST COIL20%%%%%%%%%
+%%%%%测试半监督学习的效果
+%%%%根据需求使用数据集和算法
+%%%%rate7是最后的结果
 clear;
-%load COIL20
-%load Yale_32x32;
-load YaleBext_3232
-nn = 2;
-fea = fea(1:2414,:);
-gnd = gnd(1:2414);
+for time = 1:7
+%load COIL20;
+load ORL_32x32;
+%load YaleBext_3232
+%%%%%%%%%%%%%
+% load umist
+% fea = X';
+%%%%%%%%%%%%%%%
 folder_now = pwd;
 addpath([folder_now, '\funs']);
-%% reduce demension by PCA
-% options = [];
-% options.PCARatio = 0.98;
-% %options.ReducedDim = 60;
-% [eigvector,eigvalue,meanData,new_data] = PCA(fea,opt ions);
-% fea=new_data;
-% %%
 samp_num = size(fea,1);
 nnClass = length(unique(gnd));  % The number of classes;
 num_Class=[];
@@ -23,30 +20,16 @@ for i=1:nnClass
 end
 
 fea =  NormalizeFea(fea);
-
 test = fea;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  fea_num = 30;
-%  fea_gnd = zeros(fea_num*nnClass, 1);
-% for  j=1:nnClass
-%     idx=find(gnd==j);
-%     rand_idx = randperm(num_Class(j)); 
-%     test = [test; fea(idx(rand_idx(1:fea_num)),:)];
-%     fea_gnd((j-1)*fea_num+1:j*fea_num) = j;
-% end
-% test =  NormalizeFea(test);
-% samp_num = fea_num*nnClass;
-%%%%%%%%%%%%%%%%%%%%%
 runtimes = 10;
 gama_1 = 50;
 gama_2 = 11;
-sele = 26;
+sele = time;
 minU0 = 1e-12;
 maxU0 = 1e5;  
-    %[A OBJ] = LRSA(test', gama_1, gama_2);
-    %[A OBJ] = LRSA1(test', 50, 11, 2);
-    %[A OBJ] = LRSA2(test', 50, 11, 4); 
-    [A OBJ] = LRSA3(test', 50, 11,3,64);   
+    %[A OBJ] = LRSA(test', gama_1, gama_2);%LRRADP
+    %[A OBJ] = solve_lrr(test', 1);%LRR
+    [A OBJ] =  LRRHWAP(test', 50, 11,5,64);
     A = NormalizeFea(A); 
     A = A + 0.0000001*ones(size(A));
     AG = A;
@@ -84,7 +67,7 @@ maxU0 = 1e5;
         rate(r) = ratio;
     end
     %max(rate)
-    mean(rate)
-    mean(sele)
+    rate7(time) = mean(rate)
     std(rate)
+end
 %---------------------------------------------------------------
