@@ -28,7 +28,7 @@ for i=1:nClass2
 end
 
 
-%return;
+return;
 
 %=======backup old===========
 
