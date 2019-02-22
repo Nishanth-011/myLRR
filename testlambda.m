@@ -1,5 +1,7 @@
 %这个是测试两个参数的代码根据测试的不一样注释17和18行即可
 clear;
+addpath('Datasets/');
+addpath('Functions/');
 ttime = 11;
 for time1 = 1:1%ttime
     for time2 =1:ttime
@@ -14,8 +16,8 @@ for time1 = 1:1%ttime
         gnd=datal(1:number);%kk*number);
         kkk=5;
         fea=NormalizeFea(fea); 
-        [new4 b4 dis4] =  LRRHWAP(fea',0.1,0.05*2^(i-1),5,99);
-        %[new4 b4 dis4] =  LRRHWAP(fea',0.05*2^(i-1),0.1,5,99);
+     %   [new4 b4 dis4] =  LRRHWAP(fea',0.1,0.05*2^(i-1),5,99);
+        [new4 b4 dis4] =  LRRHWAP(fea',0.05*2^(i-1),0.1,5,99);
         for i = 1:10
             c4 =  NJW(new4,kk);
             idx=bestMap(gnd,c4); % 匹配
@@ -25,3 +27,4 @@ for time1 = 1:1%ttime
         NMI4(time1,time2) = NormalizedMutualInformation(gnd,c4,length(gnd),kk); 
     end
 end
+plot(0:10,accuracy4_m)
