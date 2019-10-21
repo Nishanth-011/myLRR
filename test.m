@@ -9,8 +9,8 @@
 %比如orl进行8次每次间隔是5，则ttime = 8，interval = 5
 %最后的结果是accuracy0_m—accuracy4_m和NMI0-NMI4
 clear;
-ttime = 1;%这个是实验次数
-interval = 5;%这个是去样本数的间隔
+ttime = 5;%这个是实验次数
+interval = 2;%这个是去样本数的间隔
 addpath('Datasets/');
 addpath('Functions/');
 addpath('LRR');
@@ -18,11 +18,44 @@ for time1 = 1:1
     for time2 =1:ttime
         %load COIL20;
         %load YaleBext_3232;
-        load ORL_32x32 
+%         load ORL_32x32 
         %%%%%%%%%%umist需要这两个行一起注释
         %load umist 
         %fea=X';
         %%%%%%%%%%%%%
+        %         load AR_database_60_43
+%         fea = [NewTest_DAT;NewTrain_DAT];
+%         fea = double(fea);
+%         gnd = [testlabels,trainlabels];
+%         gnd = double(gnd);
+%         fea1 = [];
+%         gnd1 = [];
+%         for i = 1:100
+%             place = find(gnd == i);
+%             fea1 = [fea1;fea(place,:)];
+%             gnd1 = [gnd1,gnd(place)];
+%         end
+%         fea = fea1;
+%         gnd = gnd1';
+        %%%%%%%%%%%%%%%%%%
+        load USPSfu
+        fea = [];
+        gnd = [];
+        num = 50;
+        for i = 1:10
+            save = data(:,:,i);
+            save = save';
+            fea = [fea;save(1:num,:)];
+            gnd = [gnd;i*ones(num,1)];
+        end
+        fea = double(fea);
+        gnd =double(gnd);
+            
+        
+        
+        
+        
+        %%%%%%%%%%%%%%%%%%%%
         data = fea;
         datal = gnd;
         kk = interval*time2;%类别数
@@ -41,6 +74,7 @@ for time1 = 1:1
         c = transmit(b,0);
         d = (c+c')/2;
         d(find(d>0))=1;
+        Yg = Yg + 0.00001;
        [new,OBJ] =  sparse_graph_LRR(Yg,d);
         for i = 1:10
             c0 =  kmeans(fea,kk);
