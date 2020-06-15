@@ -3,8 +3,8 @@
 %%%%rate7是最后的结果
 clear;
 for time = 1:7
-%load COIL20;
-load ORL_32x32;
+load COIL20;
+% load ORL_32x32;
 %load YaleBext_3232
 %%%%%%%%%%%%%
 % load umist

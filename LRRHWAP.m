@@ -1,6 +1,6 @@
 % min_{A>=0, A*1=1, F'*F=I}  trace(D'*A) + r*||A||^2 + 2*lambda*trace(F'*L*F)
 % written by Lunke Fei on 16/07/2015
-function [A obj dis] = LRSA3(X, g1, g2, k, time)
+function [A obj dis] = LRRHWAP(X, g1, g2, k, time)
 % y: num*1 clbetaHter indicator vector
 % A: num*num learned Hymmetric Himilarity matrix
 addpath(genpath('.\YALL1_v1.3'));
@@ -43,7 +43,7 @@ if islocal == 1
         di = distX1(i,2:k+2);
         id = idx(i,2:k+2);
         A(i,id) = (di(k+1)-di)/(k*di(k+1)-sum(di(1:k))+eps);
-    end;
+    end
     A0 = (A+A')/2;
 else
     A0 = distX;
@@ -113,6 +113,35 @@ dis=distX;
 A = (H+H')/2;
 
 
+% function [A] = Calc_H(disX,Z,Y,gama, miu)
+% ss = size(disX, 1);
+% T = 0.0005;
+% for i=1:ss
+%     idxa0 = 1:ss;
+%     
+%     dz = Z(i,idxa0);
+%     dy = Y(i,idxa0);
+%     dx = disX(i, idxa0);
+%     ad = dz+dy/miu-gama*dx/miu;
+%     A(i,idxa0) = EProjSimplex_new(ad);
+%     %A(i,i) = 0;
+%     %A = (A>T).*A;
+% end
+% function [A] = Calc_H(disX,Z,Y,gama, miu)
+% ss = size(disX, 1);
+% % T = 0.0005;
+% idxa0 = 1:ss;
+% a = fix(ss/10);
+% b = mod(ss,10);
+% A = zeros(ss,ss);
+% dz = Z;
+% dy = Y;
+% dx = disX;
+% ad = dz+dy/miu-gama*dx/miu;
+% 
+% parfor i=1:ss
+%     A(i,:) = EProjSimplex_new(ad(i,:));
+% end
 function [A] = Calc_H(disX,Z,Y,gama, miu)
 ss = size(disX, 1);
 T = 0.0005;
@@ -127,6 +156,3 @@ for i=1:ss
     %A(i,i) = 0;
     %A = (A>T).*A;
 end;
-
-
-

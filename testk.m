@@ -3,11 +3,12 @@ clear;
 addpath('Datasets/');
 addpath('Functions/');
 ttime = 11;
-load ORL_32x32 
+% load ORL_32x32 
+load Umist
 data = fea;
 datal = gnd;
 parfor time =1:ttime
-    kk = 40;%2*time2 ;%类别数
+    kk = 20;%2*time2 ;%类别数
     number = find(datal==kk);%每一类的个数
     number=max(number);
     fea=data(1:number,:);%kk *number,:);  
@@ -24,5 +25,5 @@ parfor time =1:ttime
     accuracy4_m(time)=mean(accuracy4);
     NMI4(time) = NormalizedMutualInformation(gnd,c4,length(gnd),kk); 
 end
-plot(0:10,accuracy4_m);
+plot(1:11,accuracy4_m);
 saveas(gcf, 'testk', 'fig')

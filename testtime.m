@@ -6,7 +6,7 @@ ttime = 99;
 load ORL_32x32 
 data = fea;
 datal = gnd;
-for time =1:ttime
+parfor time =1:ttime
     kk = 10;%2*time2 ;%类别数
     number = find(datal==kk);%每一类的个数
     number=max(number);
